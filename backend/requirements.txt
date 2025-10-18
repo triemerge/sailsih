@@ -1,0 +1,29 @@
+# =============================================================================
+# SAILSIH - Django Backend Dependencies
+# =============================================================================
+# 
+# Python packages required for the Django backend API.
+# Install with: pip install -r requirements.txt
+#
+# @author Aditya Kumar Gupta (triemerge)
+# =============================================================================
+
+# Django Framework
+Django>=5.0
+djangorestframework>=3.14
+
+# Database
+psycopg2-binary>=2.9  # PostgreSQL adapter
+dj-database-url>=2.1  # Database URL parsing
+
+# CORS
+django-cors-headers>=4.3
+
+# Environment Variables
+python-dotenv>=1.0
+
+# Production Server
+gunicorn>=21.2
+
+# Static files
+whitenoise>=6.5
