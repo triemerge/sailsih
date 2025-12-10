@@ -257,7 +257,7 @@ class StockyardListCreate(APIView):
     """GET: List all stockyards. POST: Create a new stockyard."""
 
     def get(self, request):
-        stockyards = Stockyard.objects.order_by('id')
+        stockyards = Stockyard.objects.only('id', 'material', 'quantity', 'location', 'created_at', 'updated_at').order_by('id')
         return ok(StockyardSerializer(stockyards, many=True).data)
 
     def post(self, request):
@@ -309,7 +309,10 @@ class OrderListCreate(APIView):
     """GET: List orders (filterable by status/priority). POST: Create a new order."""
 
     def get(self, request):
-        queryset = Order.objects.all()
+        queryset = Order.objects.only(
+            'id', 'customer', 'product', 'quantity', 'priority',
+            'deadline', 'mode', 'dest_code', 'status', 'created_at', 'updated_at',
+        )
 
         # Optional filters
         if request.query_params.get('status'):

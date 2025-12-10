@@ -22,6 +22,9 @@ class Stockyard(models.Model):
     class Meta:
         db_table = 'stockyards'
         ordering = ['id']
+        indexes = [
+            models.Index(fields=['material'], name='idx_stockyard_material'),
+        ]
 
     def save(self, *args, **kwargs):
         if not self.id:
@@ -65,6 +68,11 @@ class Order(models.Model):
     class Meta:
         db_table = 'orders'
         ordering = ['priority', 'deadline']
+        indexes = [
+            models.Index(fields=['priority', 'deadline'], name='idx_order_priority_deadline'),
+            models.Index(fields=['mode', 'dest_code'], name='idx_order_mode_dest'),
+            models.Index(fields=['status'], name='idx_order_status'),
+        ]
 
     def save(self, *args, **kwargs):
         if not self.id:
