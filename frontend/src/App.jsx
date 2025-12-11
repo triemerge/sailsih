@@ -5,7 +5,7 @@ import Index from './pages/Index';
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <Toaster position="top-right" richColors />
       <Routes>
         <Route path="/" element={<Landing />} />
