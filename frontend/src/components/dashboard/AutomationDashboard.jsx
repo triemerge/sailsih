@@ -106,7 +106,65 @@ export default function AutomationDashboard() {
   };
 
   if (isLoading) {
-    return <Skeleton className="h-64 w-full" />;
+    return (
+      <div className="space-y-6 animate-in fade-in duration-300">
+        {/* Header skeleton */}
+        <div className="flex items-center justify-between">
+          <Skeleton className="h-8 w-64" />
+          <div className="flex gap-2">
+            <Skeleton className="h-9 w-24" />
+            <Skeleton className="h-9 w-36" />
+          </div>
+        </div>
+
+        {/* Summary cards skeleton */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {Array.from({ length: 4 }).map((_, i) => (
+            <Card key={i}>
+              <CardHeader className="pb-2">
+                <Skeleton className="h-4 w-20" />
+              </CardHeader>
+              <CardContent>
+                <Skeleton className="h-8 w-16" />
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+
+        {/* Tabs skeleton */}
+        <div>
+          <div className="flex gap-1 mb-4">
+            {Array.from({ length: 4 }).map((_, i) => (
+              <Skeleton key={i} className="h-9 w-24 rounded-md" />
+            ))}
+          </div>
+
+          {/* Table skeleton */}
+          <div className="rounded-md border">
+            <div className="p-4 border-b">
+              <div className="flex gap-4">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <Skeleton key={i} className="h-4 flex-1" />
+                ))}
+              </div>
+            </div>
+            {Array.from({ length: 6 }).map((_, row) => (
+              <div key={row} className="p-4 border-b last:border-0">
+                <div className="flex gap-4">
+                  {Array.from({ length: 5 }).map((_, col) => (
+                    <Skeleton
+                      key={col}
+                      className="h-4 flex-1"
+                      style={{ opacity: 1 - row * 0.12 }}
+                    />
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -255,7 +313,7 @@ export default function AutomationDashboard() {
                         P{o.priority}
                       </Badge>
                     </TableCell>
-                    <TableCell>{o.deadline ? new Date(o.deadline).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' }) : '—'}</TableCell>
+                    <TableCell>{o.deadline ? new Date(o.deadline).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' }) : '-'}</TableCell>
                     <TableCell>
                       <Badge variant={o.mode === 'rail' ? 'default' : 'outline'}>
                         {o.mode}
